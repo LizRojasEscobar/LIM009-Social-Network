@@ -18,6 +18,10 @@
     grid-column: 2/4;
     border: 1px solid rgb(136, 135, 135);
 height: 70%;
+text-align: center;
+}
+[contentEditable=false]:empty:not(:focus):before{
+    content:attr(data-text)
 }
 .width-all{
     width: 100%;
@@ -69,6 +73,8 @@ height: 70%;
     .photograph {
         height: 50px;
         width: 50px;
+        margin-left: 25%;
+        margin-top: 60%;
     }
     .edit-right {
         grid-column: 2/3;
