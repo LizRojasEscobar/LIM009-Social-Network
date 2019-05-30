@@ -9,24 +9,22 @@ import {
 const renderOnePost = (post, user, current) => {
     let label = document.createElement('div');
     label.innerHTML = `
-  <div id="comment-author" class='encabezado'><p>Publicado por ${user.name}</p>
-  <img src="./css/img/error.png" id="btn-delete" class="delete" data-uid-post="${post.userId}" data-id-post="${post.id}"><p>${post.hours}, ${post.today}</p> 
-  </div>
+  <div id="comment-author" class='encabezado'>
+  <img src="./css/img/error.png" id="btn-delete" class="delete" data-uid-post="${post.userId}" data-id-post="${post.id}">
+  <p>Publicado por ${user.name}</p>
+  <p>${post.hours}, ${post.today}</p> 
+</div>
+ 
 
   <div class="text-comment height-auto" id="content-comment-div" data-id-post="${post.id}" >${post.content}
-  <img class="img-post" src="${post.photoPost}" id="img-post" ><div id="eliminarPost"></div>
+  <img class="img-post" src="${post.photoPost}" id="img-post" >
   </div>
   <img src="./css/img/like-1.png" class="icons like"id="btn-likes" alt="icon like">
   <span id="counter-likes">${post.likes}</span>
   <img src="./css/img/paper-plane-1.png" class="icons edit" alt="icon edit" id="btn-edit" data-uid-post="${post.userId}" data-id-post="${post.id}">
   <button id="btn-save-after-edit" class="boton share">Guardar</button>
   `;
-    /* if(current.userId===post.userId){
-    const conditionDelete=label.querySelector('#comment-author');
-    const variable=label.querySelector('#eliminarPost')
-    variable.innerHTML=`<img src="./css/img/error.png" id="btn-delete" class="delete" data-uid-post="${post.userId}" data-id-post="${post.id}">` 
-    return conditionDelete.appendChild(variable)
-    } */
+
     label.setAttribute('class', "box2 height-auto");
 
     if (post.photoPost === '' || post.photoPost === null) {
@@ -66,7 +64,7 @@ const renderOnePost = (post, user, current) => {
         }
     });
 
-    return label // que imprima una un post ,que se añada al ul element
+    return label
 }
 
 export default (user, posts) => {
@@ -108,8 +106,6 @@ export default (user, posts) => {
                 <input type="file" id="image-file" class="inputfile"><img class="icon-photograph" src="./css/img/6799.png_860.png">          
         
                 <fieldset class="privacity"><legend>¿Desea que sea público?</legend><input type="checkbox" id="private" value="true"><label for="private">No,solo para mi</label></fieldset>
-               <div class="filter" id="valores"><fieldset>
-            <legend>¿Que publicaciones desea ver?</legend>
             <button id="btn-share" class="share boton">Compartir</button></div>          
     <div class="filter height-auto" id="valores"><fieldset>
  <legend>¿Que publicaciones desea ver?</legend>
@@ -130,11 +126,6 @@ export default (user, posts) => {
                 console.log("file selected!!");
                 selectedFile = e.target.files[0];
 
-            } else if (inputFile.files.length === 0) {
-                alert("Por favor selecciona la image que quieres compartir")
-                console.log("no files selected");
-            } else {
-                alert("Por favor selecciona la image que quieres compartir")
             }
 
         });
@@ -201,10 +192,12 @@ export default (user, posts) => {
 
     const viewComments = divElement.querySelector('#valores');
     viewComments.addEventListener("click", () => {
-        console.log(validar())
+        console.log(validar());
         divCommentList.innerHTML = '';
         estadosDePosts(posts, user);
     });
+
+
     estadosDePosts(posts, user);
     return divElement;
 };
